@@ -25,35 +25,37 @@
         <div class="container flex flex-col items-center mb-20 mt-20 px-5 py-10 mx-auto md:flex-row lg:px-28">
             <ul className="divide-y divide-gray-200">
                 <li className="py-12">
-                    <article class="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
-                    <dl>
-                        <dt class="sr-only">Published on</dt>
-                        <dd class="text-base leading-6 font-medium text-gray-500">
-                        <time >13 October 2021</time>
-                        </dd>
-                    </dl>
-                    <div class="space-y-5 xl:col-span-3">
-                        <div class="space-y-6">
-                        <h2 class="text-2xl leading-8 font-bold tracking-tight">
-                        <a class="text-gray-900">
-                            First BlogPost
-                        </a>
-                        </h2>
+                    <% for(var i=0; i < blogposts.length; i++){ %>
+                        <article class="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 py-4 xl:items-baseline">
+                        <dl class="-mr-2">
+                            <dt class="sr-only">Published on</dt>
+                            <dd class="text-base leading-6 font-medium text-gray-500">
+                            <time ><%= blogposts[i].created.toLocaleString('en-US', {  year: 'numeric', month: 'short', day: 'numeric' }) %> <%= blogposts[i].created.toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") %></time>
+                            </dd>
+                        </dl>
+                        <div class="space-y-5 xl:col-span-3">
+                            <div class="space-y-6">
+                            <h2 class="text-2xl leading-8 font-bold tracking-tight">
+                            <a class="text-gray-900">
+                                <%= blogposts[i].title %>
+                            </a>
+                            </h2>
+                            
+                            <div class="prose max-w-none text-gray-500">
+                               <%=  blogposts[i].body %>
+                            </div>
                         
-                        <div class="prose max-w-none text-gray-500">
-                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate consectetur quasi exercitationem voluptatibus, accusantium iure error quo nobis eos tempore.
+                            </div>
+                            <div class="text-base leading-6 font-medium">
+                            <a
+                                class="text-purple-500 hover:text-purple-600"
+                            >
+                                Read more &rarr;
+                            </a>
+                            </div>
                         </div>
-                    
-                        </div>
-                        <div class="text-base leading-6 font-medium">
-                        <a
-                            class="text-purple-500 hover:text-purple-600"
-                        >
-                            Read more &rarr;
-                        </a>
-                        </div>
-                    </div>
-                    </article>
+                        </article>
+                    <% } %>
                 </li>
             </ul>
         </div>

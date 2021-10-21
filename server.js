@@ -13,16 +13,22 @@ app.set("view engine", "ejs")
 mongoose.connect("mongodb://localhost/blogger", {useNewUrlParser:true})
 
 
-app.get("/", (req, res) => {
-    res.render("index")
+app.get("/", async (req, res) => {
+    var blogposts = await BlogPost.find({})
+    console.log(blogposts)
+    res.render("index", {blogposts: blogposts})
 })
 
 app.get("/create", (req, res) => {
     res.render("create")
 })
 
-app.post("/post/create", (req, res) => {
-    console.log(req.body)
+app.post("/post/create", async (req, res) => {
+    await BlogPost.create({
+        title: req.body.title,
+        body: req.body.body,
+        created: new Date()
+    })
     res.redirect("/")
 })
 
